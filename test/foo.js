@@ -14,6 +14,12 @@ test('decode from file', function (t) {
   t.end()
 })
 
+test('decode quoted values before inline comments', function (t) {
+  const d = i.decode('double = "value" ; comment\nsingle = \'value\' # comment\n')
+  t.same(d, { double: 'value', single: 'value' })
+  t.end()
+})
+
 test('encode from data', function (t) {
   const d = i.decode(data)
   const e = i.encode(d)
